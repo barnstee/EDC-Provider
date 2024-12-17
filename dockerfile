@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM gradle:7.6.0-jdk23 AS build
+FROM gradle:7.6.0-jdk21 AS build
 WORKDIR /app
 
 # Copy the Gradle wrapper and project files
@@ -16,7 +16,7 @@ COPY transfer ./transfer
 RUN ./gradlew build --no-daemon -x test
 
 # Stage 2: Create the final image
-FROM openjdk:23-jre-slim
+FROM openjdk:21-jre-slim
 WORKDIR /app
 
 # Copy the jar file from the build stage
