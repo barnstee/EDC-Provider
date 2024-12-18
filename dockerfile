@@ -14,6 +14,7 @@ RUN ./gradlew build --no-daemon -x test
 
 # Copy the source code and build the application
 COPY transfer ./transfer
+COPY resources ./resources
 RUN ./gradlew build --no-daemon -x test
 
 # Stage 2: Create the final image
@@ -21,10 +22,10 @@ FROM openjdk:17-slim
 WORKDIR /app
 
 # Copy the jar file from the build stage
-COPY --from=build /transfer/transfer-00-prerequisites/libs/connector.jar app.jar
+COPY --from=build /app/transfer/transfer-00-prerequisites/connector/build/libs/connector.jar app.jar
 
 # Expose the application port
 EXPOSE 80
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
