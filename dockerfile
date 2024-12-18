@@ -23,9 +23,16 @@ WORKDIR /app
 
 # Copy the jar file from the build stage
 COPY --from=build /app/transfer/transfer-00-prerequisites/connector/build/libs/connector.jar app.jar
+COPY --from=build /app/transfer/transfer-00-prerequisites/resources/certs/cert.pfx .
+COPY --from=build /app/transfer/transfer-00-prerequisites/resources/configuration/provider-configuration.properties .
 
-# Expose the application port
-EXPOSE 80
+# Expose the ports
+EXPOSE 19191
+EXPOSE 19192
+EXPOSE 19193
+EXPOSE 19194
+EXPOSE 19195
+EXPOSE 19291
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-Dedc.keystore=cert.pfx", "-Dedc.keystore.password=123456", "-Dedc.fs.config=provider-configuration.properties", "-jar", "app.jar"]
