@@ -21,8 +21,8 @@ dependencies {
 with that we can build and run the connector from the root directory:
 
 ```bash
-./gradlew clean basic:basic-01-basic-connector:build
-java -jar basic/basic-01-basic-connector/build/libs/basic-connector.jar
+./gradlew clean build
+java -jar /build/libs/basic-connector.jar
 ```
 
 _Note: the above snippet assumes that you did not alter the build file, i.e. the `shadow` plugin is used and the build

@@ -27,7 +27,7 @@ Before we can run a connector, we need to build the JAR file.
 Execute this command in project root:
 
 ```bash
-./gradlew transfer:transfer-00-prerequisites:connector:build
+./gradlew connector:build
 ```
 
 After the build end you should verify that the connector.jar is created in the directory
